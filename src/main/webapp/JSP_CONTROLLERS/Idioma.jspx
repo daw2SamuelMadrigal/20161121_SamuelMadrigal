@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root   xmlns:jsp="http://java.sun.com/JSP/Page"
+            xmlns:c="http://java.sun.com/jsp/jstl/core"
+            xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+            version="2.1">
+
+    <!-- Obtenemos pais del formulario -->
+    <c:set var="pais" value="${param.pais}"/>
+    
+    <!-- Español por defecto -->
+    <c:set var="recurso" value="es_ES" scope="session"/>
+    <fmt:setLocale value="${recurso}" scope="session"/>
+    
+    <!-- Si viene Inglaterra ponemos inglés -->
+    <c:if test="${pais=='Inglaterra'}">
+        <c:set var="recurso" value="en_GB" scope="session"/>
+        <fmt:setLocale value="${recurso}" scope="session"/>
+    </c:if>
+    
+    <!-- Url de index.jspx -->
+    <c:url var="url" value="/JSP_VIEWS/index.jspx"/>
+    
+    <!-- Redireccionamos a url -->
+    <c:redirect url="${url}"/>
+</jsp:root>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root   xmlns:jsp="http://java.sun.com/JSP/Page"
+            xmlns:c="http://java.sun.com/jsp/jstl/core"
+            version="2.1">
+
+    <!-- Bean para la elección -->
+    <jsp:useBean id="eleccionBean" scope="session" class="es.albarregas.beans.EleccionBean"/>
+    <!-- Bean para el edificio -->
+    <jsp:useBean id="edificioBean" scope="session" class="es.albarregas.beans.EdificioBean"/>
+    <!-- Bean para el cálculo -->
+    <jsp:useBean id="calcularCuota" scope="session" class="es.albarregas.util.CalcularCuota"/>
+
+    <!-- Obtenemos parametros del formulario para rellenar campos del bean edificio -->
+    <jsp:setProperty name="edificioBean" property="tipo" value="${param.tipo_edificio}"/>
+    <jsp:setProperty name="edificioBean" property="habitaciones" value="${param.habitaciones}"/>
+    <jsp:setProperty name="edificioBean" property="fecha" value="${param.fecha}"/>
+    <jsp:setProperty name="edificioBean" property="construccion" value="${param.con}"/>
+    <jsp:setProperty name="edificioBean" property="valor" value="${param.valor}"/>
+
+    <!-- Variable de cuota. Se calcula con el bean calcularCuota -->
+    <c:set var="cuota" value="${calcularCuota.calcular(edificioBean)}" scope="session"/>
+    
+    <!-- Url de verCuota.jspx -->
+    <c:url var="url" value="/JSP_VIEWS/verCuota.jspx"/>
+    
+    <!-- Si se seleccionaron los dos seguros vamos a rellenar datos de contenido -->
+    <c:if test="${eleccionBean.eleccion=='ambos'}">
+        <c:url var="url" value="/JSP_VIEWS/contenido.jspx"/>
+    </c:if>
+
+    <!-- Redireccionamos a url -->
+    <c:redirect url="${url}"/>
+</jsp:root>

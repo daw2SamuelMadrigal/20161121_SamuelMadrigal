@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root   xmlns:jsp="http://java.sun.com/JSP/Page"
+            xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+            version="2.1">
+    <jsp:directive.page contentType="text/html; charset=UTF-8" />
+    <jsp:directive.page isELIgnored="false" />
+    <jsp:output omit-xml-declaration="false"
+                doctype-root-element="html"
+                doctype-public="-//W3C//DTD XHTML 1.1//EN"
+                doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd" />
+    <html>
+        <head>
+            <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+            <title>Hogares ::: Seguros</title>
+            <link rel="stylesheet" href="/css/estilo.css" type="text/css"/>
+        </head>
+        <body>
+            <!-- Obtenemos recurso de idioma -->
+            <fmt:bundle basename="${recurso}">
+                <div id="contPrin">
+                    <jsp:include page="/JSP_INCLUDES/cabecera.jsp"/>
+                    <div id="contSecu">
+                        <h2><fmt:message key="detalleContenido"/></h2>
+                        <form action="/JSP_CONTROLLERS/Contenido.jspx" method="post">
+                            <fieldset> 
+                                <legend><em><strong><fmt:message key="datosContenido"/></strong></em></legend>
+                                <p><fmt:message key="danos"/>:<br/>
+                                    <input type="checkbox" name="danos" value="si"/>
+                                </p>
+                                <p><fmt:message key="cantidad"/>:<br/>
+                                    <select id="cantidad" name="cantidad">
+                                        <option value="10000" selected="selected">10000</option>
+                                        <option value="20000">20000</option>
+                                        <option value="30000">30000</option>
+                                        <option value="50000">50000</option>
+                                        <option value="100000">100000</option>
+                                    </select>
+                                </p>
+                                <p><fmt:message key="franquicia"/>:<br/>
+                                    <input type="radio" name="franquicia" value="0" checked="checked"/><fmt:message key="ninguna"/><br/>
+                                    <input type="radio" name="franquicia" value="500"/>500<br/>
+                                    <input type="radio" name="franquicia" value="1000"/>1000
+                                </p>
+                            </fieldset>
+                            <br/><br/>
+                            <fmt:message key="enviar" var="enviar"/>
+                            <input type="submit" name="enviar" value="${enviar}"/>
+                        </form>
+                        <p><a href="/JSP_VIEWS/index.jspx"><fmt:message key="menu"/></a></p>
+                    </div>
+                    <jsp:include page="/JSP_INCLUDES/pie.jsp"/>
+                </div>
+            </fmt:bundle>
+        </body>
+    </html>
+</jsp:root>

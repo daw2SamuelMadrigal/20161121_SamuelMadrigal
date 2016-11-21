@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root   xmlns:jsp="http://java.sun.com/JSP/Page"
+            xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+            xmlns:c="http://java.sun.com/jsp/jstl/core"
+            version="2.1">
+    <jsp:directive.page contentType="text/html; charset=UTF-8" />
+    <jsp:directive.page isELIgnored="false" />
+    <jsp:output omit-xml-declaration="false"
+                doctype-root-element="html"
+                doctype-public="-//W3C//DTD XHTML 1.1//EN"
+                doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd" />
+    <html>
+        <head>
+            <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+            <title>Hogares ::: Seguros</title>
+            <link rel="stylesheet" href="/css/estilo.css" type="text/css"/>
+        </head>
+        <!-- Bean para la elección -->
+        <jsp:useBean id="eleccionBean" scope="session" class="es.albarregas.beans.EleccionBean"/>
+        <!-- Bean para el edificio -->
+        <jsp:useBean id="edificioBean" scope="session" class="es.albarregas.beans.EdificioBean"/>
+        <!-- Bean para el contenido -->
+        <jsp:useBean id="contenidoBean" scope="session" class="es.albarregas.beans.ContenidoBean"/>
+        <body>
+            <!-- Obtenemos recurso de idioma -->
+            <fmt:bundle basename="${recurso}">
+                <div id="contPrin">
+                    <jsp:include page="/JSP_INCLUDES/cabecera.jsp"/>
+                    <div id="contSecu">
+                        <h2><fmt:message key="poliza"/></h2>
+                        
+                        <c:if test="${eleccionBean.eleccion=='uno' || eleccionBean.eleccion=='ambos'}">
+                            <p><fmt:message key="tipoEdificio"/>: ${edificioBean.tipo}</p>
+                            <p><fmt:message key="habEdificio"/>: <fmt:formatNumber pattern="#" value="${edificioBean.habitaciones}"/></p>
+                            <p><fmt:message key="fechaEdificio"/>:  ${edificioBean.fecha}</p>
+                            <p><fmt:message key="consEdificio"/>: ${edificioBean.construccion}</p>
+                            <p><fmt:message key="valorEdificio"/>: <fmt:formatNumber type="currency" value="${edificioBean.valor}"/></p>
+                        </c:if>
+                        <c:if test="${eleccionBean.eleccion=='dos' || eleccionBean.eleccion=='ambos'}">
+                            <p><fmt:message key="danos"/>: ${contenidoBean.danos}</p>
+                            <p><fmt:message key="cantidad"/>: <fmt:formatNumber type="currency" value="${contenidoBean.cantidad}"/></p>
+                            <p><fmt:message key="franquicia"/>: <fmt:formatNumber type="currency" value="${contenidoBean.franquicia}"/></p>
+                        </c:if>
+
+                        <h2>Total: <fmt:formatNumber type="currency" value="${cuota}"/></h2>
+
+                        <p><a href="/JSP_VIEWS/index.jspx"><fmt:message key="menu"/></a></p>
+                    </div>
+                    <jsp:include page="/JSP_INCLUDES/pie.jsp"/>
+                </div>
+            </fmt:bundle>
+        </body>
+    </html>
+</jsp:root>

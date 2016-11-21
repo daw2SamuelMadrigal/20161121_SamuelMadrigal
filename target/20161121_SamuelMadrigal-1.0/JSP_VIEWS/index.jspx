@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root   xmlns:jsp="http://java.sun.com/JSP/Page"
+            xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+            xmlns:c="http://java.sun.com/jsp/jstl/core"
+            version="2.1">
+    <jsp:directive.page contentType="text/html; charset=UTF-8" />
+    <jsp:directive.page isELIgnored="false" />
+    <jsp:output omit-xml-declaration="false"
+                doctype-root-element="html"
+                doctype-public="-//W3C//DTD XHTML 1.1//EN"
+                doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd" />
+    <html>
+        <head>
+            <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+            <title>Hogares ::: Seguros</title>
+            <link rel="stylesheet" href="/css/estilo.css" type="text/css"/>
+        </head>
+        <!-- Reseteamos variable cuota -->
+        <c:remove var="cuota"/>
+        <body>
+            <!-- Obtenemos recurso de idioma -->
+            <fmt:bundle basename="${recurso}">
+                <div id="contPrin">
+                    <jsp:include page="/JSP_INCLUDES/cabecera.jsp"/>
+                    <div id="contSecu">
+                        <h2><fmt:message key="bienvenida"/></h2>
+                        <h4><fmt:message key="eleccion"/></h4>
+                        <form action="/JSP_CONTROLLERS/Eleccion.jspx" method="post">
+                            <label><fmt:message key="edificio"/></label>
+                            <input type="checkbox" name="eleccion1" value="continente" checked="checked"/>
+                            <br/>
+                            <label><fmt:message key="contenido"/></label>
+                            <input type="checkbox" name="eleccion2" value="contenido" checked="checked"/>
+                            <br/><br/>
+                            <fmt:message key="enviar" var="enviar"/>
+                            <input type="submit" name="enviar" value="${enviar}"/>
+                        </form>
+                        <p><a href="/home.jspx"><fmt:message key="idioma"/></a></p>
+                    </div>
+                    <jsp:include page="/JSP_INCLUDES/pie.jsp"/>
+                </div>
+            </fmt:bundle>
+        </body>
+    </html>
+</jsp:root>

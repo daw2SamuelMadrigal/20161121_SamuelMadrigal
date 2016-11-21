@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jsp:root   xmlns:jsp="http://java.sun.com/JSP/Page"
+            xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+            version="2.1">
+    <jsp:directive.page contentType="text/html; charset=UTF-8" />
+    <jsp:directive.page isELIgnored="false" />
+    <jsp:output omit-xml-declaration="false"
+                doctype-root-element="html"
+                doctype-public="-//W3C//DTD XHTML 1.1//EN"
+                doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd" />
+    <html>
+        <head>
+            <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+            <title>Hogares ::: Seguros</title>
+            <link rel="stylesheet" href="/css/estilo.css" type="text/css"/>
+        </head>
+        <body>
+            <!-- Obtenemos recurso de idioma -->
+            <fmt:bundle basename="${recurso}">
+                <div id="contPrin">
+                    <jsp:include page="/JSP_INCLUDES/cabecera.jsp"/>
+                    <div id="contSecu">
+                        <h2><fmt:message key="detalleEdificio"/></h2>
+                        <form action="/JSP_CONTROLLERS/Edificio.jspx" method="post">
+                            <fieldset> 
+                                <legend><em><strong><fmt:message key="datosEdificio"/></strong></em></legend>
+                                <p><fmt:message key="tipoEdificio"/>:<br/>
+                                    <select id="tipo_edificio" name="tipo_edificio">
+                                        <option value="0.95" selected="selected"><fmt:message key="piso"/></option>
+                                        <option value="1.00"><fmt:message key="casa"/></option>
+                                        <option value="1.05"><fmt:message key="adosado"/></option>
+                                        <option value="1.10"><fmt:message key="duplex"/></option>
+                                        <option value="1.20"><fmt:message key="chalet"/></option>
+                                    </select>
+                                </p>
+                                <p><fmt:message key="habEdificio"/>:<br/>
+                                    <select id="habitaciones" name="habitaciones">
+                                        <option value="1" selected="selected">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5"><fmt:message key="cinco"/></option>
+                                    </select>
+                                </p>
+                                <p><fmt:message key="fechaEdificio"/>:<br/>
+                                    <select id="fecha" name="fecha">
+                                        <option value="1949" selected="selected"><fmt:message key="1950"/></option>
+                                        <option value="1950"><fmt:message key="1990"/></option>
+                                        <option value="1991"><fmt:message key="2005"/></option>
+                                        <option value="2006"><fmt:message key="2015"/></option>
+                                        <option value="2016"><fmt:message key="2016"/></option>
+                                    </select>
+                                </p>
+                                <p><fmt:message key="consEdificio"/>:<br/>
+                                    <input type="radio" name="con" value="hormigon" checked="checked"/><fmt:message key="hormigon"/>
+                                    <input type="radio" name="con" value="madera"/><fmt:message key="madera"/>
+                                </p>
+                                <p><fmt:message key="valorEdificio"/>:<br />
+                                    <select id="valor" name="valor">
+                                        <option value="25000" selected="selected"><fmt:message key="50000"/></option>
+                                        <option value="50001"><fmt:message key="80000"/></option>
+                                        <option value="80001"><fmt:message key="100000"/></option>
+                                        <option value="100001"><fmt:message key="150000"/></option>
+                                        <option value="125000"><fmt:message key="150001"/></option>
+                                    </select>
+                                </p>
+                            </fieldset>
+                            <br/><br/>
+                            <fmt:message key="enviar" var="enviar"/>
+                            <input type="submit" name="enviar" value="${enviar}"/>
+                        </form>
+                        <p><a href="/JSP_VIEWS/index.jspx"><fmt:message key="menu"/></a></p>
+                    </div>
+                    <jsp:include page="/JSP_INCLUDES/pie.jsp"/>
+                </div>
+            </fmt:bundle>
+        </body>
+    </html>
+</jsp:root>
