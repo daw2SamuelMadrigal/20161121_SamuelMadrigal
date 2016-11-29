@@ -3,8 +3,10 @@ package es.albarregas.util;
 import es.albarregas.beans.ContenidoBean;
 import es.albarregas.beans.EdificioBean;
 
+// ESTO HAY QUE HACERLO EN UNA PAGINA JSPX
+
 public class CalcularCuota {
-    
+
     private double cuota;
 
     public double getCuota() {
@@ -14,13 +16,13 @@ public class CalcularCuota {
     public void setCuota(double cuota) {
         this.cuota = cuota;
     }
-    
-    
-    
+
+
+
     public double calcular(EdificioBean edificio){
         Double cuotaBasica;
         Double prima;
-        
+
         cuotaBasica=edificio.getValor()*0.005;
         prima=cuotaBasica*edificio.getTipo();
         prima+=(prima/100)*edificio.getHabitaciones();
@@ -39,14 +41,14 @@ public class CalcularCuota {
         if("madera".equals(edificio.getConstruccion())){
             prima+=prima*0.1;
         }
-            
+
         cuota=prima;
         return cuota;
     }
-    
+
     public double calcularContenido(ContenidoBean contenido){
         Double prima;
-        
+
         prima=contenido.getCantidad()*0.008;
         String danos=contenido.getDanos();
         if(danos.equals("si")){
@@ -58,7 +60,7 @@ public class CalcularCuota {
             break;
             case 1000:prima-=prima*0.2;
         }
-        
+
         cuota=prima;
         return cuota;
     }
